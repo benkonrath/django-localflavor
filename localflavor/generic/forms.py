@@ -126,12 +126,12 @@ class BICFormField(forms.CharField):
         # https://www2.swift.com/uhbonline/books/public/en_uk/bic_policy/bic_policy.pdf
         value = super(BICFormField, self).to_python(value)
         if value is not None:
-            return value.upper()
+            return value.upper().replace(' ', '').replace('-', '')
         return value
 
     def prepare_value(self, value):
         # BIC is always written in upper case.
         value = super(BICFormField, self).prepare_value(value)
         if value is not None:
-            return value.upper()
+            return value.upper().replace(' ', '').replace('-', '')
         return value

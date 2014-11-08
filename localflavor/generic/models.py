@@ -74,7 +74,7 @@ class BICField(models.CharField):
         # https://www2.swift.com/uhbonline/books/public/en_uk/bic_policy/bic_policy.pdf
         value = super(BICField, self).to_python(value)
         if value is not None:
-            return value.replace(' ', '').upper()
+            return value.upper().replace(' ', '').replace('-', '')
         return value
 
     def formfield(self, **kwargs):

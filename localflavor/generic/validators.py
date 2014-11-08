@@ -181,7 +181,7 @@ class BICValidator(object):
         if value is None:
             return value
 
-        value = value.upper()
+        value = value.upper().replace(' ', '').replace('-', '')
 
         # Length is 8 or 11.
         bic_length = len(value)

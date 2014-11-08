@@ -247,7 +247,13 @@ class BICTests(TestCase):
             'daBadKkK',
 
             'UNCRIT2B912',
-            'DSBACNBXSHA'
+            'DSBACNBXSHA',
+
+            'DEUT DE FF',
+            'DEUT-DE-FF',
+            'NEDS-ZA-JJ-XXX',
+            'NEDS ZA JJ XXX',
+
         ]
 
         invalid = {
@@ -274,7 +280,12 @@ class BICTests(TestCase):
             'NEDSZAJJXXX': 'NEDSZAJJXXX',
             'DABADKKK': 'DABADKKK',
             'UNCRIT2B912': 'UNCRIT2B912',
-            'DSBACNBXSHA': 'DSBACNBXSHA'
+            'DSBACNBXSHA': 'DSBACNBXSHA',
+
+            'DEUT DE FF': 'DEUTDEFF',
+            'DEUT-DE-FF': 'DEUTDEFF',
+            'NEDS-ZA-JJ-XXX': 'NEDSZAJJXXX',
+            'NEDS ZA JJ XXX': 'NEDSZAJJXXX',
         }
 
         invalid = {
