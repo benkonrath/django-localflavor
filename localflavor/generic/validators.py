@@ -5,12 +5,7 @@ import string
 
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
-
-try:
-    from django_countries import countries
-    BIC_COUNTRIES = [code for code, name in list(countries)]
-except ImportError:
-    BIC_COUNTRIES = None
+from .iso_3166_countries import ISO_3166_1_ALPHA2_COUNTRY_CODES
 
 # Dictionary of ISO country code to IBAN length.
 #
@@ -200,7 +195,6 @@ class BICValidator(object):
                 raise ValidationError(_('{0} is not a valid institution code.').format(institution_code))
 
         # Letters 5 and 6 consist of an ISO 3166-1 alpha-2 country code.
-        if BIC_COUNTRIES:
-            country_code = value[4:6]
-            if country_code not in BIC_COUNTRIES:
-                raise ValidationError(_('{0} is not a valid country code.').format(country_code))
+        country_code = value[4:6]
+        if country_code not in ISO_3166_1_ALPHA2_COUNTRY_CODES:
+            raise ValidationError(_('{0} is not a valid country code.').format(country_code))

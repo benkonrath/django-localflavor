@@ -263,39 +263,6 @@ class BICTests(TestCase):
         for bic in invalid:
             self.assertRaisesMessage(ValidationError,  invalid[bic], BICValidator(), bic)
 
-    def test_bic_validator_with_no_country_validation(self):
-        valid = [
-            'DEUTDEFF',
-            'deutdeff',
-
-            'NEDSZAJJXXX',
-            'NEDSZAJJxxx',
-
-            'DABADKKK',
-            'daBadKkK',
-
-            'UNCRIT2B912',
-            'DSBACNBXSHA',
-
-            'CIBCJJH2'  # Invalid when django-countries is installed.
-        ]
-
-        invalid = {
-            'NEDSZAJJXX': 'BIC codes have either 8 or 11 characters.',
-            'DÉUTDEFF': 'is not a valid institution code.'
-        }
-
-        # Simulate django-countries not installed.
-        from localflavor.generic import validators
-        validators.BIC_COUNTRIES = None
-
-        bic_validator = BICValidator()
-        for bic in valid:
-            bic_validator(bic)
-
-        for bic in invalid:
-            self.assertRaisesMessage(ValidationError,  invalid[bic], BICValidator(), bic)
-
     def test_form_field_formatting(self):
         bic_form_field = BICFormField()
         self.assertEqual(bic_form_field.prepare_value('deutdeff'), 'DEUTDEFF')

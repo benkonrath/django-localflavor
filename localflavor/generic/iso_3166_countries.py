@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Sourced from https://www.iso.org/obp/ui on 2014-11-08
 
 ISO_3166_1_ALPHA2_COUNTRY_CODES = (

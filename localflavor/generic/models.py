@@ -54,9 +54,9 @@ class IBANField(models.CharField):
 
 class BICField(models.CharField):
     """
-    A BIC code is either 8 or 11 alphanumeric characters.
+    A BIC consists of 8 (BIC8) or 11 (BIC11) alphanumeric characters.
 
-    The country code component of a BIC code will only be checked if django-countries >= 2.0 is installed.
+    It is also known as SWIFT-code
 
     https://en.wikipedia.org/wiki/ISO_9362
 
