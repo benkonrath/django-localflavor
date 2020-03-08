@@ -1,5 +1,5 @@
 inherits:
-  - strictness_high
+  - strictness_medium
 
 pylint:
   options:
