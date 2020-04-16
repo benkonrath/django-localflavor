@@ -64,9 +64,8 @@ class PTCitizenCardNumberField(Field):
     def compute(index, value):
         if index % 2:
             return value
-        else:
-            value *= 2
-            return value if value < 10 else value - 9
+        value *= 2
+        return value if value < 10 else value - 9
 
 
 class PTRegionSelect(Select):

@@ -206,7 +206,6 @@ class IDNationalIdentityNumberField(Field):
             t2 = time.localtime(d)
             if t1[:3] != t2[:3]:
                 return False
-            else:
-                return True
+            return True
         except (OverflowError, ValueError):
             return False

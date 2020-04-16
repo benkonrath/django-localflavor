@@ -184,7 +184,7 @@ class IBANValidator:
         https://en.wikipedia.org/wiki/International_Bank_Account_Number#Validating_the_IBAN
         """
         if value is None:
-            return value
+            return
 
         value = value.upper().replace(' ', '').replace('-', '')
 
@@ -221,13 +221,13 @@ class BICValidator:
 
     def __call__(self, value):
         if value is None:
-            return value
+            return
 
         value = value.upper()
 
         # Length is 8 or 11.
         bic_length = len(value)
-        if bic_length != 8 and bic_length != 11:
+        if bic_length not in (8, 11):
             raise ValidationError(_('BIC codes have either 8 or 11 characters.'))
 
         # BIC is alphanumeric
@@ -271,7 +271,7 @@ class EANValidator:
 
     def __call__(self, value):
         if value is None:
-            return value
+            return
         if self.strip_nondigits:
             value = re.compile(r'[^\d]+').sub('', value)
         if not ean.is_valid(value):
