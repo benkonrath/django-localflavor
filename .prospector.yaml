@@ -1,10 +1,14 @@
-strictness: low
+inherits:
+  - strictness_low
+
 uses:
-    - django
+  - django
 
 pylint:
   options:
     max-line-length: 120
+  disable:
+    - import-outside-toplevel
 
 pep8:
   options:

@@ -124,12 +124,13 @@ class NOBankAccountNumber(CharField):
         if value in self.empty_values:
             # It's alright to be empty.
             return
-        elif not value.isdigit():
+        if not value.isdigit():
             # You must only contain decimals.
             raise ValidationError(self.error_messages['invalid'])
-        elif len(value) != 11:
+        if len(value) != 11:
             # They only have one length: the number is 10!
-            # That being said, you always store them with the check digit included, so 11.
+            # That being said, you always store them with the check digit included, so
+            # 11.
             raise ValidationError(self.error_messages['invalid_length'])
 
         # The control/check digit is the last digit
@@ -140,8 +141,8 @@ class NOBankAccountNumber(CharField):
         weights = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]
         result = sum(w * (int(x)) for w, x in zip(weights, bank_number))
         remainder = result % 11
-        # The checksum is 0 in the event there's no remainder, seeing as we cannot have a checksum of 11
-        # when 11 is one digit longer than we've got room for
+        # The checksum is 0 in the event there's no remainder, seeing as we cannot have
+        # a checksum of 11 when 11 is one digit longer than we've got room for.
         checksum = 0 if remainder == 0 else 11 - remainder
 
         if checksum != check_digit:

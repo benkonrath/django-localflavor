@@ -81,10 +81,9 @@ class UMCNField(RegexField):
         m = 11 - ((7 * (a + g) + 6 * (b + h) + 5 * (c + i) + 4 * (d + j) + 3 * (e + k) + 2 * (f + l)) % 11)
         if 1 <= m <= 9 and checksum == m:
             return True
-        elif m == 11 and checksum == 0:
+        if m == 11 and checksum == 0:
             return True
-        else:
-            return False
+        return False
 
     def _validate_date_part(self, value):
         daypart, monthpart, yearpart = int(value[:2]), int(value[2:4]), int(value[4:7])

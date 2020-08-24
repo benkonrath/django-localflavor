@@ -160,11 +160,12 @@ class IBANValidator:
 
         Original checksum in input value is ignored.
         """
-        # 1. Move the two initial characters to the end of the string, replacing checksum for '00'
+        # 1. Move the two initial characters to the end of the string, replacing
+        #    checksum for '00'
         value = value[4:] + value[:2] + '00'
 
-        # 2. Replace each letter in the string with two digits, thereby expanding the string, where
-        #    A = 10, B = 11, ..., Z = 35.
+        # 2. Replace each letter in the string with two digits, thereby expanding the
+        #    string, where A = 10, B = 11, ..., Z = 35.
         value_digits = ''
         for x in value:
             if '0' <= x <= '9':
@@ -174,7 +175,8 @@ class IBANValidator:
             else:
                 raise ValidationError(_('%s is not a valid character for IBAN.') % x)
 
-        # 3. The remainder of the number above when divided by 97 is then subtracted from 98.
+        # 3. The remainder of the number above when divided by 97 is then subtracted
+        #    from 98.
         return '%02d' % (98 - int(value_digits) % 97)
 
     def __call__(self, value):
@@ -188,7 +190,8 @@ class IBANValidator:
 
         value = value.upper().replace(' ', '').replace('-', '')
 
-        # Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
+        # Check that the total IBAN length is correct as per the country. If not, the
+        # IBAN is invalid.
         country_code = value[:2]
         if country_code in self.validation_countries:
 
@@ -244,9 +247,9 @@ class BICValidator:
         if country_code not in ISO_3166_1_ALPHA2_COUNTRY_CODES:
             raise ValidationError(_('%s is not a valid country code.') % country_code)
 
-        # Letters 7 and 8 are a "location" code. As per ISO20022 Payments
-        # Maintenance 2009 document, they may only be from the charset [A-Z2-9][A-NP-Z0-9]
-        if '1' == value[6] or 'O' == value[7]:
+        # Letters 7 and 8 are a "location" code. As per ISO20022 Payments Maintenance
+        # 2009 document, they may only be from the charset [A-Z2-9][A-NP-Z0-9].
+        if value[6] == '1' or value[7] == 'O':
             raise ValidationError(_('%s is not a valid location code.') % value[6:8])
 
 
