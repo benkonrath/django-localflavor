@@ -95,7 +95,7 @@ class SplitDateTimeFieldTests(DateTimeFieldTestCase):
 
 class IBANTests(TestCase):
     def test_iban_validator__example_ibans(self):
-        # Example IBANs are from the official IBAN Registry (TXT) document available here:
+        # IBAN Registry v101 example IBANs published here:
         # https://www.swift.com/swift-resource/11971/download
         valid_ibans = [
             "AD12 0001 2030 2003 5910 0100",
